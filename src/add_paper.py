@@ -55,11 +55,12 @@ def add_paper(
     # 5. Topics 허브 노트 자동 생성
     ensure_topic_notes(tags, vault_path=vault_path)
 
-    # 6. Reading Log 업데이트
+    # 6. Reading Log 업데이트 (위키링크는 Vault 기준 상대 경로)
+    relative_note_path = str(Path(note_path).relative_to(vault_path)).replace("\\", "/")
     append_to_reading_log(
         entry={
             "title": metadata["title"],
-            "note_path": note_path,
+            "note_path": relative_note_path,
             "tags": tags,
             "apa_citation": apa,
         },
@@ -76,6 +77,8 @@ def add_paper(
 
 if __name__ == "__main__":
     import argparse
+    import sys
+    sys.stdout.reconfigure(encoding="utf-8")
 
     parser = argparse.ArgumentParser(description="논문을 Obsidian Vault에 추가합니다.")
     parser.add_argument("--doi", required=True, help="DOI 또는 https://doi.org/... URL")
