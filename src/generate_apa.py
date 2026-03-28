@@ -65,7 +65,7 @@ def generate_apa_citation(metadata: dict) -> str:
 
     parts = [
         f"{authors_str.rstrip('.')}. ({year}).",
-        f"{title}.",
+        f"{title.rstrip('.')}.",
         f"{journal_part}.",
     ]
     if doi_url:
