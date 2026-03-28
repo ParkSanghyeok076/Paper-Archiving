@@ -7,6 +7,7 @@ from pathlib import Path
 from src.fetch_metadata import fetch_by_doi
 from src.generate_apa import generate_apa_citation
 from src.create_note import build_note_content, get_note_path
+from src.reading_log import append_to_reading_log
 from config import VAULT_PATH
 
 
@@ -49,6 +50,18 @@ def add_paper(
     # 4. 파일 저장
     note_path = get_note_path(metadata, vault_path=vault_path)
     Path(note_path).write_text(content, encoding="utf-8")
+
+    # 5. Reading Log 업데이트
+    append_to_reading_log(
+        entry={
+            "title": metadata["title"],
+            "note_path": note_path,
+            "tags": tags,
+            "apa_citation": apa,
+        },
+        date=read_date,
+        vault_path=vault_path,
+    )
 
     return {
         "note_path": note_path,
