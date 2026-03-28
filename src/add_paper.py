@@ -8,6 +8,7 @@ from src.fetch_metadata import fetch_by_doi
 from src.generate_apa import generate_apa_citation
 from src.create_note import build_note_content, get_note_path
 from src.reading_log import append_to_reading_log
+from src.topics import ensure_topic_notes
 from config import VAULT_PATH
 
 
@@ -51,7 +52,10 @@ def add_paper(
     note_path = get_note_path(metadata, vault_path=vault_path)
     Path(note_path).write_text(content, encoding="utf-8")
 
-    # 5. Reading Log 업데이트
+    # 5. Topics 허브 노트 자동 생성
+    ensure_topic_notes(tags, vault_path=vault_path)
+
+    # 6. Reading Log 업데이트
     append_to_reading_log(
         entry={
             "title": metadata["title"],
