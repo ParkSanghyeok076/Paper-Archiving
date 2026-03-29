@@ -44,14 +44,14 @@ def test_slugify_truncates_long_titles():
 # --- get_note_path 테스트 ---
 
 def test_get_note_path_format(tmp_path):
-    """경로 형식: Papers/{year}/{year}-{first_author_family}-{slug}.md"""
+    """경로 형식: Papers/{year}-{first_author_family}-{slug}.md (flat)"""
     path = get_note_path(SAMPLE_METADATA, vault_path=str(tmp_path))
-    assert path == str(tmp_path / "Papers" / "2024" / "2024-Smith-the-impact-of-ai-on-hr-practices.md")
+    assert path == str(tmp_path / "Papers" / "2024-Smith-the-impact-of-ai-on-hr-practices.md")
 
 
-def test_get_note_path_creates_year_directory(tmp_path):
+def test_get_note_path_creates_papers_directory(tmp_path):
     get_note_path(SAMPLE_METADATA, vault_path=str(tmp_path))
-    assert (tmp_path / "Papers" / "2024").exists()
+    assert (tmp_path / "Papers").exists()
 
 
 # --- build_note_content 테스트 ---

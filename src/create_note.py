@@ -24,7 +24,7 @@ def get_note_path(metadata: dict, vault_path: str) -> str:
     slug = slugify(title)
     filename = f"{year}-{first_family}-{slug}.md"
 
-    note_dir = Path(vault_path) / "Papers" / str(year)
+    note_dir = Path(vault_path) / "Papers"
     note_dir.mkdir(parents=True, exist_ok=True)
 
     return str(note_dir / filename)
