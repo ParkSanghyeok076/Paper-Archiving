@@ -91,19 +91,38 @@ def test_note_has_abstract_section():
     assert "This paper examines AI adoption in HR departments." in content
 
 
-def test_note_has_key_findings_section():
+def test_note_has_core_argument_section():
     content = build_note_content(SAMPLE_METADATA)
-    assert "## Key Findings" in content
+    assert "## 핵심 주장" in content
 
 
-def test_note_has_methodology_section():
+def test_note_has_theoretical_background_section():
     content = build_note_content(SAMPLE_METADATA)
-    assert "## Methodology" in content
+    assert "## 이론적 배경" in content
 
 
-def test_note_has_personal_notes_section():
+def test_note_has_research_method_table():
     content = build_note_content(SAMPLE_METADATA)
-    assert "## Personal Notes" in content
+    assert "## 연구 방법" in content
+    assert "| 항목 |" in content
+
+
+def test_note_has_key_results_section():
+    content = build_note_content(SAMPLE_METADATA)
+    assert "## 주요 결과" in content
+
+
+def test_note_has_limitations_section():
+    content = build_note_content(SAMPLE_METADATA)
+    assert "## 한계점 및 향후 연구" in content
+
+
+def test_note_has_research_connection_section():
+    content = build_note_content(SAMPLE_METADATA)
+    assert "## 내 연구와의 연결" in content
+    assert "인용 포인트" in content
+    assert "방법론 참고할 점" in content
+    assert "비판적 메모" in content
 
 
 def test_note_has_related_topics_wikilinks():
